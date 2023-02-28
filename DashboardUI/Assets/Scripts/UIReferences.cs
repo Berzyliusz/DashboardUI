@@ -18,6 +18,8 @@ namespace CarSystems.View
     {
         [field: SerializeField] public TextMeshProUGUI SpeedText { get; private set; }
         [field: SerializeField] public DriveModeReference[] DriveModes { get; private set; }
+        [field: SerializeField] public Image EVIcon { get; private set; }
+        [field: SerializeField] public Image SportIcon { get; private set; }
     }
 
     [System.Serializable]

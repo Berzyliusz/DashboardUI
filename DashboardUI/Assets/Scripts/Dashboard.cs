@@ -8,6 +8,8 @@ namespace CarSystems.View
     {
         void SetDriveMode(DriveMode mode);
         void SetSpeed(float speed);
+        void SetEVMode(bool isOn);
+        void SetSportMode(bool isOn);
     }
 
     public class Dashboard : IDashboard
@@ -17,7 +19,8 @@ namespace CarSystems.View
 
         public Dashboard(UIReferences references, CarParams carParams)
         {
-            driveMode = new DriveModeHandler(references.CentralElementReferences.DriveModes);
+            var central = references.CentralElementReferences;
+            driveMode = new DriveModeHandler(central.DriveModes, central.EVIcon, central.SportIcon);
             speedMeter = new SpeedMeter(references.CentralElementReferences.SpeedText, carParams.Vmax);
         }
 
@@ -26,9 +29,19 @@ namespace CarSystems.View
             driveMode.SetDriveMode(mode);
         }
 
+        public void SetEVMode(bool isOn)
+        {
+            driveMode.SetEVMode(isOn);
+        }
+
         public void SetSpeed(float speed)
         {
             speedMeter.SetSpeed(speed);
+        }
+
+        public void SetSportMode(bool isOn)
+        {
+            driveMode.SetSportMode(isOn);
         }
     }
 }

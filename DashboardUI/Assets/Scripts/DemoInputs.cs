@@ -39,6 +39,10 @@ namespace CarSystems
         {
             dashboard.SetSpeed(random.Next(240));
             dashboard.SetDriveMode((DriveMode)random.Next(Enum.GetNames(typeof(DriveMode)).Length));
+            var isEVOn = random.Next(2);
+            var isSportOn = random.Next(2);
+            dashboard.SetEVMode(isEVOn == 0);
+            dashboard.SetSportMode(isSportOn == 0);
         }
     }
 } 
