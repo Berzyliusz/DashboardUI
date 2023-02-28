@@ -1,6 +1,5 @@
 using CarSystems.View;
 using System;
-using System.Collections.Generic;
 
 namespace CarSystems
 {
@@ -42,12 +41,18 @@ namespace CarSystems
             dashboard.SetDriveMode((DriveMode)random.Next(Enum.GetNames(typeof(DriveMode)).Length));
             dashboard.SetEVMode(random.Next(2) == 0);
             dashboard.SetSportMode(random.Next(2) == 0);
-            
-            for(int i = 0; i < 6; i++)
+
+            var nextOrPreviousSong = random.Next(3);
+            if (nextOrPreviousSong == 0)
+                dashboard.NextSong();
+            if(nextOrPreviousSong == 1)
+                dashboard.PreviousSong();
+
+            for (int i = 0; i < 6; i++)
             {
                 var indicatorToModify = random.Next(Enum.GetNames(typeof(IndicatorType)).Length - 2);
                 dashboard.SetIndicator((IndicatorType)indicatorToModify, random.Next(2) == 0);
-            }            
+            }
         }
     }
 } 

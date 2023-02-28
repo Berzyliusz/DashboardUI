@@ -7,12 +7,15 @@ namespace CarSystems.View
         void SetEVMode(bool isOn);
         void SetSportMode(bool isOn);
         void SetIndicator(IndicatorType type, bool isOn);
+        void NextSong();
+        void PreviousSong();
     }
 
     public class Dashboard : IDashboard
     {
         DriveModeHandler driveMode;
         IndicatorHandler indicatorHandler;
+        MusicHandler musicHandler;
         SpeedMeter speedMeter;
 
         public Dashboard(UIReferences references, CarParams carParams)
@@ -21,6 +24,7 @@ namespace CarSystems.View
             driveMode = new DriveModeHandler(central.DriveModes, central.EVIcon, central.SportIcon);
             speedMeter = new SpeedMeter(central.SpeedText, central.SpeedSlider, carParams.Vmax);
             indicatorHandler = new IndicatorHandler(references.IndicatorReferences);
+            musicHandler = new MusicHandler(references.MusicPlayerReferences);
         }
 
         public void SetDriveMode(DriveMode mode)
@@ -36,6 +40,16 @@ namespace CarSystems.View
         public void SetIndicator(IndicatorType type, bool isOn)
         {
             indicatorHandler.SetIndicator(type, isOn);
+        }
+
+        public void NextSong()
+        {
+            musicHandler.Next();
+        }
+
+        public void PreviousSong()
+        {
+            musicHandler.Previous();
         }
 
         public void SetSpeed(float speed)

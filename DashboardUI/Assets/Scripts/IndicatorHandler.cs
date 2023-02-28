@@ -37,7 +37,6 @@ namespace CarSystems.View
             {
                 throw new ArgumentException($"{type} not handled in indicator handler!");
             }
-
         }
     }
 }
