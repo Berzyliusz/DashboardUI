@@ -3,6 +3,7 @@ using UnityEngine;
 using DG.Tweening;
 using UnityEngine.UI;
 using System;
+using System.Collections.Generic;
 
 namespace CarSystems.View
 {
@@ -28,6 +29,8 @@ namespace CarSystems.View
         readonly float secondNeighbourOffset = 170f;
         readonly float firstNeighbourScale = 0.8f;
         readonly float secondNeighbourScale = 0.6f;
+
+        HashSet<int> usedIndexes = new HashSet<int>();
 
         int currentSong;
         float timeOfSongStart;
@@ -85,85 +88,123 @@ namespace CarSystems.View
 
         void SwapSongs()
         {
-            var currentlyPlayedSong = songs.musicReferences[currentSong].transform;
+            usedIndexes.Clear();
 
-            currentlyPlayedSong.SetAsLastSibling();
+            var currentlyPlayedSong = songs.musicReferences[currentSong].transform;
+            usedIndexes.Add(currentSong);
+            
             currentlyPlayedSong.DOMove(centerPosition, tweenDuration);
             currentlyPlayedSong.DOScale(1, tweenDuration);
             currentlyPlayedSong.DORotate(Vector3.zero, tweenDuration);
 
-            SetFirstRightNeighbour();
-            SetFirstLeftNeighbour();
-            SetSecondRightNeighbour();
-            SetSecondLeftNeighbour();
+            SetRightNeighbours();
+            SetLeftNeighbours();
+            currentlyPlayedSong.SetAsLastSibling();
 
-            // Hide others
+            HideUnusedElements();
         }
 
-        void SetFirstRightNeighbour()
+        void SetRightNeighbours()
         {
-            int index;
-            if (currentSong + 1 < songs.musicReferences.Length - 1)
-                index = currentSong + 1;
+            int firstIndex;
+            int secondIndex;
+
+            if (currentSong + 1 < songs.musicReferences.Length)
+            {
+                firstIndex = currentSong + 1;
+            }
             else
-                index = 0;
+            {
+                firstIndex = 0;
+            }
 
-            Transform rightNeighbour = songs.musicReferences[index].transform;
+            if (currentSong + 2 < songs.musicReferences.Length)
+            {
+                secondIndex = currentSong + 2;
+            }
+            else
+            {
+                if(firstIndex == 0)
+                    secondIndex= 1;
+                else
+                    secondIndex = 0;
+            }
 
-            rightNeighbour.SetSiblingIndex(songs.musicReferences.Length - 2);
-            rightNeighbour.DOMove(firstRightPosition, tweenDuration);
-            rightNeighbour.DOScale(firstNeighbourScale, tweenDuration);
-            rightNeighbour.DORotate(firstRightRotation, tweenDuration);
+            Transform firstRightNeighbour = songs.musicReferences[firstIndex].transform;
+
+            firstRightNeighbour.SetSiblingIndex(songs.musicReferences.Length - 1);
+            firstRightNeighbour.DOMove(firstRightPosition, tweenDuration);
+            firstRightNeighbour.DOScale(firstNeighbourScale, tweenDuration);
+            firstRightNeighbour.DORotate(firstRightRotation, tweenDuration);
+
+            Transform secondRightNeighbour = songs.musicReferences[secondIndex].transform;
+
+            secondRightNeighbour.SetSiblingIndex(songs.musicReferences.Length - 2);
+            secondRightNeighbour.DOMove(secondRightPosition, tweenDuration);
+            secondRightNeighbour.DOScale(secondNeighbourScale, tweenDuration);
+            secondRightNeighbour.DORotate(secondRightRotation, tweenDuration);
+
+            usedIndexes.Add(firstIndex);
+            usedIndexes.Add(secondIndex);
         }
 
-        void SetFirstLeftNeighbour()
+        void SetLeftNeighbours()
         {
-            int index;
+            int firstIndex;
+            int secondIndex;
+
             if (currentSong - 1 < 0)
-                index = songs.musicReferences.Length - 1;
+            {
+                firstIndex = songs.musicReferences.Length - 1;
+                secondIndex = songs.musicReferences.Length - 2;
+            }
             else
-                index = currentSong - 1;
+            {
+                firstIndex = currentSong - 1;
+            }
 
-            Transform leftNeighbour = songs.musicReferences[index].transform;
-
-            leftNeighbour.SetSiblingIndex(songs.musicReferences.Length - 3);
-            leftNeighbour.DOMove(firstLeftPosition, tweenDuration);
-            leftNeighbour.DOScale(firstNeighbourScale, tweenDuration);
-            leftNeighbour.DORotate(firstLeftRotation, tweenDuration);
-        }
-
-        void SetSecondRightNeighbour()
-        {
-            int index;
-            
-            if (currentSong + 2 < songs.musicReferences.Length - 2)
-                index = currentSong + 2;
-            else
-                index = 1;
-
-            Transform rightNeighbour = songs.musicReferences[index].transform;
-
-            rightNeighbour.SetSiblingIndex(songs.musicReferences.Length - 4);
-            rightNeighbour.DOMove(secondRightPosition, tweenDuration);
-            rightNeighbour.DOScale(secondNeighbourScale, tweenDuration);
-            rightNeighbour.DORotate(secondRightRotation, tweenDuration);
-        }
-
-        void SetSecondLeftNeighbour()
-        {
-            int index;
-            
             if (currentSong - 2 < 0)
-                index = songs.musicReferences.Length - 2;
+            {
+                if (firstIndex == songs.musicReferences.Length - 1)
+                    secondIndex = songs.musicReferences.Length - 2;
+                else
+                    secondIndex = songs.musicReferences.Length - 1;
+            }
             else
-                index = currentSong - 2;
+            {
+                secondIndex = currentSong - 2;
+            }
 
-            Transform leftNeighbour = songs.musicReferences[index].transform;
+            Transform firstLeftNeighbour = songs.musicReferences[firstIndex].transform;
 
-            leftNeighbour.SetSiblingIndex(songs.musicReferences.Length - 5);
-            leftNeighbour.DOMove(secondLeftPosition, tweenDuration);
-            leftNeighbour.DOScale(secondNeighbourScale, tweenDuration);
-            leftNeighbour.DORotate(secondLeftRotation, tweenDuration);
+            firstLeftNeighbour.SetSiblingIndex(songs.musicReferences.Length - 3);
+            firstLeftNeighbour.DOMove(firstLeftPosition, tweenDuration);
+            firstLeftNeighbour.DOScale(firstNeighbourScale, tweenDuration);
+            firstLeftNeighbour.DORotate(firstLeftRotation, tweenDuration);
+
+            Transform secondLeftNeighbour = songs.musicReferences[secondIndex].transform;
+
+            secondLeftNeighbour.SetSiblingIndex(songs.musicReferences.Length - 5);
+            secondLeftNeighbour.DOMove(secondLeftPosition, tweenDuration);
+            secondLeftNeighbour.DOScale(secondNeighbourScale, tweenDuration);
+            secondLeftNeighbour.DORotate(secondLeftRotation, tweenDuration);
+
+            usedIndexes.Add(firstIndex);
+            usedIndexes.Add(secondIndex);
+        }
+
+
+        void HideUnusedElements()
+        {
+            for(int i = 0; i < songs.musicReferences.Length; i++)
+            {
+                if(!usedIndexes.Contains(i))
+                {
+                    Transform unusedElement = songs.musicReferences[i].transform;
+                    unusedElement.localScale = Vector3.zero;
+                    unusedElement.position = centerPosition;
+                }
+            }
         }
     }
 }
