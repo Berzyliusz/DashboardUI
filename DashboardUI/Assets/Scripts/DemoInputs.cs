@@ -1,5 +1,4 @@
 using CarSystems.View;
-using DG.Tweening;
 using System;
 
 namespace CarSystems
@@ -11,23 +10,35 @@ namespace CarSystems
     public class DemoInputs
     {
         IDashboard dashboard;
+        Random random;
 
-        public DemoInputs(IDashboard dashboard)
+        float inputChangeTime;
+        float timer;
+
+        public DemoInputs(IDashboard dashboard, float inputChangeTime)
         {
+            this.inputChangeTime = inputChangeTime;
+            timer = inputChangeTime;
             this.dashboard = dashboard;
-
-            StartDemoInputs();
+            random= new Random();
+            DisplayRandomInputs();
         }
 
-        void StartDemoInputs()
+        public void Update(float deltaTime)
         {
-            SwitchDriveModes();
+            timer -= deltaTime;
+
+            if (timer < 0)
+            {
+                timer = inputChangeTime;
+                DisplayRandomInputs();
+            }
         }
 
-        private void SwitchDriveModes()
+        void DisplayRandomInputs()
         {
-            // keep increasing the index of enum and switching over time
-            dashboard.SetDriveMode(DriveMode.Reverse);
+            dashboard.SetSpeed(random.Next(240));
+            dashboard.SetDriveMode((DriveMode)random.Next(Enum.GetNames(typeof(DriveMode)).Length));
         }
     }
-}
+} 

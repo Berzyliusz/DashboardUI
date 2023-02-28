@@ -3,19 +3,28 @@ using UnityEngine;
 
 namespace CarSystems
 {
+    public struct CarParams
+    {
+        public int Vmax => 240;
+    }
+
     public class Systems : MonoBehaviour
     {
         [SerializeField] UIReferences references;
 
+        CarParams carParams;
         IDashboard dashboard;
+        DemoInputs inputs;
 
-        private void Awake()
+        void Awake()
         {
-            dashboard = new Dashboard(references);
-            DemoInputs inputs = new DemoInputs(dashboard);
+            dashboard = new Dashboard(references, carParams);
+            inputs = new DemoInputs(dashboard, 2f);
         }
-        // Expose an interface allowing to update the dashboard
 
-        // Setup and collect all dashboard elements in a facade
+        void Update() // Just for demo
+        {
+            inputs.Update(Time.deltaTime);
+        }
     }
 }

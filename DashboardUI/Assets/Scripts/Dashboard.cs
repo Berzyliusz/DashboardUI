@@ -13,10 +13,12 @@ namespace CarSystems.View
     public class Dashboard : IDashboard
     {
         DriveModeHandler driveMode;
+        SpeedMeter speedMeter;
 
-        public Dashboard(UIReferences references)
+        public Dashboard(UIReferences references, CarParams carParams)
         {
             driveMode = new DriveModeHandler(references.CentralElementReferences.DriveModes);
+            speedMeter = new SpeedMeter(references.CentralElementReferences.SpeedText, carParams.Vmax);
         }
 
         public void SetDriveMode(DriveMode mode)
@@ -26,10 +28,7 @@ namespace CarSystems.View
 
         public void SetSpeed(float speed)
         {
-            // pass to speedmeter
-            // speeedmeter handles:
-            // 1. slider of speed
-            // 2. speed value 
+            speedMeter.SetSpeed(speed);
         }
     }
 }

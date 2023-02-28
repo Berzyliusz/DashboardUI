@@ -1495,7 +1495,7 @@ MonoBehaviour:
     <PlaybackSlider>k__BackingField: {fileID: 1333268975}
     <PlaybackTimer>k__BackingField: {fileID: 1334221015}
   <CentralElementReferences>k__BackingField:
-    <SpeedText>k__BackingField: {fileID: 0}
+    <SpeedText>k__BackingField: {fileID: 1508696442}
     <DriveModes>k__BackingField:
     - <ModeText>k__BackingField: {fileID: 1417451148}
       <Mode>k__BackingField: 1
