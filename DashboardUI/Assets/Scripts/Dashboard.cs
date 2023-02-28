@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 namespace CarSystems.View
 {
     public interface IDashboard
@@ -10,11 +6,13 @@ namespace CarSystems.View
         void SetSpeed(float speed);
         void SetEVMode(bool isOn);
         void SetSportMode(bool isOn);
+        void SetIndicator(IndicatorType type, bool isOn);
     }
 
     public class Dashboard : IDashboard
     {
         DriveModeHandler driveMode;
+        IndicatorHandler indicatorHandler;
         SpeedMeter speedMeter;
 
         public Dashboard(UIReferences references, CarParams carParams)
@@ -22,6 +20,7 @@ namespace CarSystems.View
             var central = references.CentralElementReferences;
             driveMode = new DriveModeHandler(central.DriveModes, central.EVIcon, central.SportIcon);
             speedMeter = new SpeedMeter(references.CentralElementReferences.SpeedText, carParams.Vmax);
+            indicatorHandler = new IndicatorHandler(references.IndicatorReferences);
         }
 
         public void SetDriveMode(DriveMode mode)
@@ -32,6 +31,11 @@ namespace CarSystems.View
         public void SetEVMode(bool isOn)
         {
             driveMode.SetEVMode(isOn);
+        }
+
+        public void SetIndicator(IndicatorType type, bool isOn)
+        {
+            indicatorHandler.SetIndicator(type, isOn);
         }
 
         public void SetSpeed(float speed)
