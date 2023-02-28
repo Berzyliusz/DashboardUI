@@ -1,20 +1,36 @@
-﻿using TMPro;
+﻿using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
 
 namespace CarSystems.View
 {
     public class DriveModeHandler
     {
-        private readonly TextMeshProUGUI parkingMode;
-        private readonly TextMeshProUGUI reverseMode;
-        private readonly TextMeshProUGUI neutralMode;
-        private readonly TextMeshProUGUI driveMode;
+        Dictionary<DriveMode, TextMeshProUGUI> modes;
 
-        public DriveModeHandler(TextMeshProUGUI parkingMode, TextMeshProUGUI reverseMode, TextMeshProUGUI neutralMode, TextMeshProUGUI driveMode)
+        Color startingColor;
+        Color selectedColor = Color.white;
+        DriveMode selectedMode;
+
+        public DriveModeHandler(DriveModeReference[] references)
         {
-            this.parkingMode = parkingMode;
-            this.reverseMode = reverseMode;
-            this.neutralMode = neutralMode;
-            this.driveMode = driveMode;
+            modes = new Dictionary<DriveMode, TextMeshProUGUI>();
+            foreach (DriveModeReference reference in references)
+            {
+                modes[reference.Mode] = reference.ModeText;
+            }
+
+            startingColor = modes[DriveMode.Neutral].color;
+            SetDriveMode(DriveMode.Parking);
+        }
+
+        public void SetDriveMode(DriveMode mode)
+        {
+            modes[selectedMode].fontStyle = FontStyles.Normal;
+            modes[selectedMode].color = startingColor;
+            selectedMode = mode;
+            modes[selectedMode].fontStyle = FontStyles.Bold;
+            modes[selectedMode].color = selectedColor;
         }
     }
 }

@@ -12,14 +12,16 @@ namespace CarSystems.View
 
     public class Dashboard : IDashboard
     {
+        DriveModeHandler driveMode;
+
         public Dashboard(UIReferences references)
         {
-
+            driveMode = new DriveModeHandler(references.CentralElementReferences.DriveModes);
         }
 
         public void SetDriveMode(DriveMode mode)
         {
-            
+            driveMode.SetDriveMode(mode);
         }
 
         public void SetSpeed(float speed)

@@ -1,5 +1,6 @@
 using CarSystems.View;
 using DG.Tweening;
+using System;
 
 namespace CarSystems
 {
@@ -20,7 +21,13 @@ namespace CarSystems
 
         void StartDemoInputs()
         {
-            
+            SwitchDriveModes();
+        }
+
+        private void SwitchDriveModes()
+        {
+            // keep increasing the index of enum and switching over time
+            dashboard.SetDriveMode(DriveMode.Reverse);
         }
     }
 }

@@ -17,12 +17,14 @@ namespace CarSystems.View
     public struct CentralElementReferences
     {
         [field: SerializeField] public TextMeshProUGUI SpeedText { get; private set; }
+        [field: SerializeField] public DriveModeReference[] DriveModes { get; private set; }
+    }
 
-        [field: SerializeField] public TextMeshProUGUI ParkingMode { get; private set; }
-        [field: SerializeField] public TextMeshProUGUI ReverseMode { get; private set; }
-        [field: SerializeField] public TextMeshProUGUI NeutralMode { get; private set; }
-        [field: SerializeField] public TextMeshProUGUI DriveMode { get; private set; }
-
+    [System.Serializable]
+    public struct DriveModeReference
+    {
+        [field: SerializeField] public TextMeshProUGUI ModeText { get; private set; }
+        [field: SerializeField] public DriveMode Mode { get; private set; }
     }
 
 

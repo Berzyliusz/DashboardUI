@@ -12,8 +12,7 @@ namespace CarSystems
         private void Awake()
         {
             dashboard = new Dashboard(references);
-            // Create a dashboard class passing there references to the UI elements
-            // Create a 'mockup' input class
+            DemoInputs inputs = new DemoInputs(dashboard);
         }
         // Expose an interface allowing to update the dashboard
 
