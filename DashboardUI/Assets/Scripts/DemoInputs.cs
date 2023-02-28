@@ -21,7 +21,6 @@ namespace CarSystems
             timer = inputChangeTime;
             this.dashboard = dashboard;
             random= new Random();
-            DisplayRandomInputs();
         }
 
         public void Update(float deltaTime)
@@ -42,11 +41,13 @@ namespace CarSystems
             dashboard.SetEVMode(random.Next(2) == 0);
             dashboard.SetSportMode(random.Next(2) == 0);
 
-/*            var nextOrPreviousSong = random.Next(3);
-            if (nextOrPreviousSong == 0)
-                dashboard.NextSong();
-            if(nextOrPreviousSong == 1)
-                dashboard.PreviousSong();*/
+            dashboard.PreviousSong();
+
+            /*            var nextOrPreviousSong = random.Next(3);
+                        if (nextOrPreviousSong == 0)
+                            dashboard.NextSong();
+                        if(nextOrPreviousSong == 1)
+                            dashboard.PreviousSong();*/
 
             for (int i = 0; i < 6; i++)
             {

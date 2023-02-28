@@ -57,6 +57,7 @@ namespace CarSystems.View
                 currentSong= 0;
 
             ResetTimerAndSlider();
+            SwapSongs();
         }
 
         public void Previous()
@@ -66,6 +67,7 @@ namespace CarSystems.View
                 currentSong = songs.musicReferences.Length - 1;
 
             ResetTimerAndSlider();
+            SwapSongs();
         }
 
         public void Update(float deltaTime)
