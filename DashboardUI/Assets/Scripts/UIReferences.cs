@@ -11,6 +11,7 @@ namespace CarSystems.View
         [field: SerializeField] public TextMeshProUGUI AuthorName { get; private set; }
         [field: SerializeField] public Slider PlaybackSlider { get; private set; }
         [field: SerializeField] public TextMeshProUGUI PlaybackTimer { get; private set; }
+        [field: SerializeField] public GameObject CentralPosition { get; private set; }
     }
 
     [System.Serializable]

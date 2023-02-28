@@ -10,6 +10,7 @@ namespace CarSystems
 
     public class Systems : MonoBehaviour
     {
+        [SerializeField] MusicReferences musicReferences;
         [SerializeField] UIReferences references;
 
         CarParams carParams;
@@ -18,7 +19,7 @@ namespace CarSystems
 
         void Awake()
         {
-            dashboard = new Dashboard(references, carParams);
+            dashboard = new Dashboard(references, carParams, musicReferences);
             inputs = new DemoInputs(dashboard, 2f);
         }
 
