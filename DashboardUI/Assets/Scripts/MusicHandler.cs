@@ -97,17 +97,18 @@ namespace CarSystems.View
             SetSecondRightNeighbour();
             SetSecondLeftNeighbour();
 
-            
             // Hide others
         }
 
         void SetFirstRightNeighbour()
         {
-            Transform rightNeighbour;
-            if (currentSong + 1 < songs.musicReferences.Length - 2)
-                rightNeighbour = songs.musicReferences[currentSong + 1].transform;
+            int index;
+            if (currentSong + 1 < songs.musicReferences.Length - 1)
+                index = currentSong + 1;
             else
-                rightNeighbour = songs.musicReferences[0].transform;
+                index = 0;
+
+            Transform rightNeighbour = songs.musicReferences[index].transform;
 
             rightNeighbour.SetSiblingIndex(songs.musicReferences.Length - 2);
             rightNeighbour.DOMove(firstRightPosition, tweenDuration);
@@ -117,11 +118,13 @@ namespace CarSystems.View
 
         void SetFirstLeftNeighbour()
         {
-            Transform leftNeighbour;
+            int index;
             if (currentSong - 1 < 0)
-                leftNeighbour = songs.musicReferences[songs.musicReferences.Length - 1].transform;
+                index = songs.musicReferences.Length - 1;
             else
-                leftNeighbour = songs.musicReferences[currentSong - 1].transform;
+                index = currentSong - 1;
+
+            Transform leftNeighbour = songs.musicReferences[index].transform;
 
             leftNeighbour.SetSiblingIndex(songs.musicReferences.Length - 3);
             leftNeighbour.DOMove(firstLeftPosition, tweenDuration);
@@ -131,11 +134,14 @@ namespace CarSystems.View
 
         void SetSecondRightNeighbour()
         {
-            Transform rightNeighbour;
+            int index;
+            
             if (currentSong + 2 < songs.musicReferences.Length - 2)
-                rightNeighbour = songs.musicReferences[currentSong + 2].transform;
+                index = currentSong + 2;
             else
-                rightNeighbour = songs.musicReferences[1].transform;
+                index = 1;
+
+            Transform rightNeighbour = songs.musicReferences[index].transform;
 
             rightNeighbour.SetSiblingIndex(songs.musicReferences.Length - 4);
             rightNeighbour.DOMove(secondRightPosition, tweenDuration);
@@ -145,11 +151,14 @@ namespace CarSystems.View
 
         void SetSecondLeftNeighbour()
         {
-            Transform leftNeighbour;
+            int index;
+            
             if (currentSong - 2 < 0)
-                leftNeighbour = songs.musicReferences[songs.musicReferences.Length - 2].transform;
+                index = songs.musicReferences.Length - 2;
             else
-                leftNeighbour = songs.musicReferences[currentSong - 2].transform;
+                index = currentSong - 2;
+
+            Transform leftNeighbour = songs.musicReferences[index].transform;
 
             leftNeighbour.SetSiblingIndex(songs.musicReferences.Length - 5);
             leftNeighbour.DOMove(secondLeftPosition, tweenDuration);
