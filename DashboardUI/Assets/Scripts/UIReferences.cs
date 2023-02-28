@@ -29,10 +29,19 @@ namespace CarSystems.View
         [field: SerializeField] public DriveMode Mode { get; private set; }
     }
 
+    [System.Serializable]
+    public struct IndicatorReference
+    {
+        [field: SerializeField] public Image ReferenceImage { get; private set; }
+        [field: SerializeField] public IndicatorType Type { get; private set; }
+        [field: SerializeField] public Sprite OnSprite { get; private set; }
+        [field: SerializeField] public Sprite OffSprite { get; private set; }
+    }
 
     public class UIReferences : MonoBehaviour
     {
         [field: SerializeField] public MusicPlayerReferences MusicPlayerReferences { get; private set; }
         [field: SerializeField] public CentralElementReferences CentralElementReferences { get; private set; }
+        [field: SerializeField] public IndicatorReference[] IndicatorReferences { get; private set; }
     }
 }
