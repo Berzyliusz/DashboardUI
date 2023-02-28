@@ -2,6 +2,7 @@
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 namespace CarSystems.View
 {
@@ -14,15 +15,23 @@ namespace CarSystems.View
         readonly Vector3 centerPosition;
         readonly Vector3 firstRightPosition;
         readonly Vector3 firstLeftPosition;
-        readonly Vector3 firstRightRotation = new Vector3(0, 50, 0);
-        readonly Vector3 firstLeftRotation = new Vector3(0, -50, 0);
+        readonly Vector3 secondRightPosition;
+        readonly Vector3 secondLeftPosition;
+
+        readonly Vector3 firstRightRotation = new Vector3(0, 40, 0);
+        readonly Vector3 firstLeftRotation = new Vector3(0, -40, 0);
+        readonly Vector3 secondRightRotation = new Vector3(0, 50, 0);
+        readonly Vector3 secondLeftRotation = new Vector3(0, -50, 0);
 
         float playbackTime;
         float mockEverySongLength = 59f;
 
         readonly float tweenDuration = 0.5f;
+
         readonly float firstNeighbourOffset = 120f;
-        readonly float firstNeighbourScale = 0.7f;
+        readonly float secondNeighbourOffset = 170f;
+        readonly float firstNeighbourScale = 0.8f;
+        readonly float secondNeighbourScale = 0.6f;
 
         int currentSong;
 
@@ -33,10 +42,10 @@ namespace CarSystems.View
             centerPosition = references.CentralPosition.transform.position;
             firstRightPosition = new Vector3(centerPosition.x + firstNeighbourOffset, centerPosition.y, centerPosition.z);
             firstLeftPosition = new Vector3(centerPosition.x - firstNeighbourOffset, centerPosition.y, centerPosition.z);
+            secondRightPosition = new Vector3(centerPosition.x + secondNeighbourOffset, centerPosition.y, centerPosition.z);
+            secondLeftPosition = new Vector3(centerPosition.x - secondNeighbourOffset, centerPosition.y, centerPosition.z);
 
-            this.songs = songs; // Assume we would also get songs data, album covers etc. injected here
-
-            //Todo: Calculate positions according to offset of the reference central position
+            this.songs = songs; // Assume we would also get songs data, album covers etc. injected here, maybe after construction.
 
             SwapSongs();
         }
@@ -91,9 +100,11 @@ namespace CarSystems.View
 
             SetFirstRightNeighbour();
             SetFirstLeftNeighbour();
+            SetSecondRightNeighbour();
+            SetSecondLeftNeighbour();
 
-            // shift others either into pre-assigned left 1,2 / right 1,2 positons
-            // or move them out of scope 
+            
+            // Hide others
         }
 
         void SetFirstRightNeighbour()
@@ -122,6 +133,34 @@ namespace CarSystems.View
             leftNeighbour.DOMove(firstLeftPosition, tweenDuration);
             leftNeighbour.DOScale(firstNeighbourScale, tweenDuration);
             leftNeighbour.DORotate(firstLeftRotation, tweenDuration);
+        }
+
+        void SetSecondRightNeighbour()
+        {
+            Transform rightNeighbour;
+            if (currentSong + 2 < songs.musicReferences.Length - 2)
+                rightNeighbour = songs.musicReferences[currentSong + 2].transform;
+            else
+                rightNeighbour = songs.musicReferences[1].transform;
+
+            rightNeighbour.SetSiblingIndex(songs.musicReferences.Length - 4);
+            rightNeighbour.DOMove(secondRightPosition, tweenDuration);
+            rightNeighbour.DOScale(secondNeighbourScale, tweenDuration);
+            rightNeighbour.DORotate(secondRightRotation, tweenDuration);
+        }
+
+        void SetSecondLeftNeighbour()
+        {
+            Transform leftNeighbour;
+            if (currentSong - 2 < 0)
+                leftNeighbour = songs.musicReferences[songs.musicReferences.Length - 2].transform;
+            else
+                leftNeighbour = songs.musicReferences[currentSong - 2].transform;
+
+            leftNeighbour.SetSiblingIndex(songs.musicReferences.Length - 5);
+            leftNeighbour.DOMove(secondLeftPosition, tweenDuration);
+            leftNeighbour.DOScale(secondNeighbourScale, tweenDuration);
+            leftNeighbour.DORotate(secondLeftRotation, tweenDuration);
         }
     }
 }
