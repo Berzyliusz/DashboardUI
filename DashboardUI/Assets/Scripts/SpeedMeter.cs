@@ -1,19 +1,24 @@
 ﻿using DG.Tweening;
 using TMPro;
+using UnityEngine.UI;
 
 namespace CarSystems.View
 {
     public class SpeedMeter
     {
         readonly TextMeshProUGUI speedText;
+        readonly Slider speedSlider;
+        readonly int vMax;
 
         float currentSpeed;
 
         string[] speedStrings;
 
-        public SpeedMeter(TextMeshProUGUI speedText, int vMax)
+        public SpeedMeter(TextMeshProUGUI speedText, Slider speedSlider, int vMax)
         {
             this.speedText = speedText;
+            this.speedSlider = speedSlider;
+            this.vMax = vMax;
             speedText.text = currentSpeed.ToString();
 
             speedStrings = new string[vMax];
@@ -26,7 +31,13 @@ namespace CarSystems.View
         public void SetSpeed(float targetSpeed)
         {
             DOTween.To(() => currentSpeed, x => currentSpeed = x, targetSpeed, 1.5f)
-                .OnUpdate(() => speedText.text = speedStrings[((int)currentSpeed)]);
+                .OnUpdate(() => UpdateDisplay());
+        }
+
+        void UpdateDisplay()
+        {
+            speedText.text = speedStrings[((int)currentSpeed)];
+            speedSlider.value = currentSpeed / vMax;
         }
     }
 }

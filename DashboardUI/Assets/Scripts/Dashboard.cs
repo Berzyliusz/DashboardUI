@@ -19,7 +19,7 @@ namespace CarSystems.View
         {
             var central = references.CentralElementReferences;
             driveMode = new DriveModeHandler(central.DriveModes, central.EVIcon, central.SportIcon);
-            speedMeter = new SpeedMeter(references.CentralElementReferences.SpeedText, carParams.Vmax);
+            speedMeter = new SpeedMeter(central.SpeedText, central.SpeedSlider, carParams.Vmax);
             indicatorHandler = new IndicatorHandler(references.IndicatorReferences);
         }
 

@@ -20,6 +20,7 @@ namespace CarSystems.View
         [field: SerializeField] public DriveModeReference[] DriveModes { get; private set; }
         [field: SerializeField] public Image EVIcon { get; private set; }
         [field: SerializeField] public Image SportIcon { get; private set; }
+        [field: SerializeField] public Slider SpeedSlider { get; private set; }
     }
 
     [System.Serializable]
