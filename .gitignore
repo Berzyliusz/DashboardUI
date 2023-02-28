@@ -10,6 +10,14 @@
 /[Ll]ogs/
 /[Mm]emoryCaptures/
 
+/DashboardUI/Library/
+/DashboardUI/Temp/
+/DashboardUI/Obj/
+/DashboardUI/Build/
+/DashboardUI/Builds/
+/DashboardUI/Logs/
+/DashboardUI/MemoryCaptures/
+
 # Asset meta data should only be ignored when the corresponding asset is also ignored
 !/[Aa]ssets/**/*.meta
 
