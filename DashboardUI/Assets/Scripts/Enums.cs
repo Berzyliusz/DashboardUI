@@ -15,12 +15,12 @@
         Head,
         FogRear,
         Position,
-        LeftTurn,
-        RightTurn,
         Evenabled,
         Airbag,
         Seatbelt,
         HandBrake,
         Park,
+        LeftTurn,
+        RightTurn,
     };
 }

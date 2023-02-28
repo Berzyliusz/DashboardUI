@@ -2417,7 +2417,7 @@ MonoBehaviour:
     <SportIcon>k__BackingField: {fileID: 654531405}
   <IndicatorReferences>k__BackingField:
   - <ReferenceImage>k__BackingField: {fileID: 112386047}
-    <Type>k__BackingField: 5
+    <Type>k__BackingField: 10
     <OnSprite>k__BackingField: {fileID: 21300000, guid: 2248045c66b792048bc9cb90743221bb,
       type: 3}
     <OffSprite>k__BackingField: {fileID: 21300000, guid: 01ffa87b4522c9c498821e389ebf5488,
@@ -2453,31 +2453,31 @@ MonoBehaviour:
     <OffSprite>k__BackingField: {fileID: 21300000, guid: e1d9f19af9076854ab842fdd31f4bdd5,
       type: 3}
   - <ReferenceImage>k__BackingField: {fileID: 888791034}
-    <Type>k__BackingField: 7
+    <Type>k__BackingField: 5
     <OnSprite>k__BackingField: {fileID: 21300000, guid: e019473e08a538044bd77a5252fb8392,
       type: 3}
     <OffSprite>k__BackingField: {fileID: 21300000, guid: 32abf5d048d29384493ee08e507eadea,
       type: 3}
   - <ReferenceImage>k__BackingField: {fileID: 1582014667}
-    <Type>k__BackingField: 8
+    <Type>k__BackingField: 6
     <OnSprite>k__BackingField: {fileID: 21300000, guid: 76ff80cd37e09794497ef6d64d2b1ea3,
       type: 3}
     <OffSprite>k__BackingField: {fileID: 21300000, guid: 44cd09165c669e1419f515bd191c62c6,
       type: 3}
   - <ReferenceImage>k__BackingField: {fileID: 99107538}
-    <Type>k__BackingField: 9
+    <Type>k__BackingField: 7
     <OnSprite>k__BackingField: {fileID: 21300000, guid: c02a67366dd2c0a47901befc73eeb041,
       type: 3}
     <OffSprite>k__BackingField: {fileID: 21300000, guid: 45675f796694c8d47a62499e259fc558,
       type: 3}
   - <ReferenceImage>k__BackingField: {fileID: 210465794}
-    <Type>k__BackingField: 10
+    <Type>k__BackingField: 8
     <OnSprite>k__BackingField: {fileID: 21300000, guid: f14cc0c68de9dbb428e79369e3945fec,
       type: 3}
     <OffSprite>k__BackingField: {fileID: 21300000, guid: 7878cbfd6219af44eaecce919cd3be84,
       type: 3}
   - <ReferenceImage>k__BackingField: {fileID: 1044028486}
-    <Type>k__BackingField: 11
+    <Type>k__BackingField: 9
     <OnSprite>k__BackingField: {fileID: 21300000, guid: 2ec7490f9ad0c1749bcfe572d955558a,
       type: 3}
     <OffSprite>k__BackingField: {fileID: 21300000, guid: 9d58fb4e26793a0438ad5895eef06ef4,

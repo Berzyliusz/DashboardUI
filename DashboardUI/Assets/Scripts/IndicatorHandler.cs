@@ -29,5 +29,15 @@ namespace CarSystems.View
             var imageToUse = isOn ? indicator.OnSprite : indicator.OffSprite;
             indicator.ReferenceImage.sprite = imageToUse;
         }
+
+        public void SetIndicatorBlinking(IndicatorType type, bool isOn)
+        {
+            if (!indicators.ContainsKey(type))
+            {
+                throw new ArgumentException($"{type} not handled in indicator handler!");
+            }
+
+
+        }
     }
 }
