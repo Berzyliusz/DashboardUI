@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using CarSystems.View;
+using DG.Tweening;
 
 namespace CarSystems
 {
@@ -10,6 +9,18 @@ namespace CarSystems
     /// </summary>
     public class DemoInputs
     {
+        IDashboard dashboard;
 
+        public DemoInputs(IDashboard dashboard)
+        {
+            this.dashboard = dashboard;
+
+            StartDemoInputs();
+        }
+
+        void StartDemoInputs()
+        {
+            
+        }
     }
 }

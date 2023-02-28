@@ -1,13 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
+using CarSystems.View;
 using UnityEngine;
 
 namespace CarSystems
 {
     public class Systems : MonoBehaviour
     {
+        [SerializeField] UIReferences references;
+
+        IDashboard dashboard;
+
         private void Awake()
         {
+            dashboard = new Dashboard(references);
             // Create a dashboard class passing there references to the UI elements
             // Create a 'mockup' input class
         }

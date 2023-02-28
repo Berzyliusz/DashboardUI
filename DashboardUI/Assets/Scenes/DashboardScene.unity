@@ -1449,6 +1449,12 @@ MonoBehaviour:
     <AuthorName>k__BackingField: {fileID: 1630438933}
     <PlaybackSlider>k__BackingField: {fileID: 1333268975}
     <PlaybackTimer>k__BackingField: {fileID: 1334221015}
+  <CentralElementReferences>k__BackingField:
+    <SpeedText>k__BackingField: {fileID: 0}
+    <ParkingMode>k__BackingField: {fileID: 1417451148}
+    <ReverseMode>k__BackingField: {fileID: 38943627}
+    <NeutralMode>k__BackingField: {fileID: 1624960916}
+    <DriveMode>k__BackingField: {fileID: 1041702205}
 --- !u!4 &1192091570
 Transform:
   m_ObjectHideFlags: 0
