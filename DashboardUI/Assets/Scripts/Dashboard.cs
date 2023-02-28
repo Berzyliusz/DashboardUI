@@ -9,6 +9,7 @@ namespace CarSystems.View
         void SetIndicator(IndicatorType type, bool isOn);
         void NextSong();
         void PreviousSong();
+        void Update(float deltaTime);
     }
 
     public class Dashboard : IDashboard
@@ -60,6 +61,11 @@ namespace CarSystems.View
         public void SetSportMode(bool isOn)
         {
             driveMode.SetSportMode(isOn);
+        }
+
+        public void Update(float deltaTime)
+        {
+            musicHandler.Update(deltaTime);
         }
     }
 }

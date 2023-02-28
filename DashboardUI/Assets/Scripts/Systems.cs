@@ -22,8 +22,9 @@ namespace CarSystems
             inputs = new DemoInputs(dashboard, 2f);
         }
 
-        void Update() // Just for demo
+        void Update()
         {
+            dashboard.Update(Time.deltaTime);
             inputs.Update(Time.deltaTime);
         }
     }

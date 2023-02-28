@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using System;
+using TMPro;
 using UnityEngine.UI;
 
 namespace CarSystems.View
@@ -7,6 +8,9 @@ namespace CarSystems.View
     {
         readonly Slider playbackSlider;
         readonly TextMeshProUGUI playbackTimer;
+
+        float playbackTime;
+        float mockEverySongLength = 59f;
 
         public MusicHandler(MusicPlayerReferences references)
         {
@@ -24,6 +28,21 @@ namespace CarSystems.View
         public void Previous()
         {
             ResetTimerAndSlider();
+        }
+
+        public void Update(float deltaTime)
+        {
+            playbackTime += deltaTime;
+            
+
+            if(playbackTime > mockEverySongLength)
+            {
+                ResetTimerAndSlider();
+                return;
+            }
+
+            playbackTimer.text = playbackTime.ToString("0.00");
+            playbackSlider.value = playbackTime / mockEverySongLength;
         }
 
         private void ResetTimerAndSlider()
