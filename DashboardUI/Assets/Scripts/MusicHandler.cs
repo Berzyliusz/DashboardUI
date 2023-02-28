@@ -2,7 +2,7 @@
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.UI;
-using System.Collections.Generic;
+using System;
 
 namespace CarSystems.View
 {
@@ -23,17 +23,15 @@ namespace CarSystems.View
         readonly Vector3 secondRightRotation = new Vector3(0, 50, 0);
         readonly Vector3 secondLeftRotation = new Vector3(0, -50, 0);
 
-        float playbackTime;
-        float mockEverySongLength = 59f;
-
         readonly float tweenDuration = 0.5f;
-
         readonly float firstNeighbourOffset = 120f;
         readonly float secondNeighbourOffset = 170f;
         readonly float firstNeighbourScale = 0.8f;
         readonly float secondNeighbourScale = 0.6f;
 
         int currentSong;
+        float timeOfSongStart;
+        float mockEverySongLength = 20f;
 
         public MusicHandler(MusicPlayerReferences references, MusicReferences songs)
         {
@@ -72,21 +70,15 @@ namespace CarSystems.View
 
         public void Update(float deltaTime)
         {
-            playbackTime += deltaTime;
-            //Todo: Swap to seconds counter
-
-            if(playbackTime > mockEverySongLength)
-            {
-                ResetTimerAndSlider();
-                return;
-            }
-
-            playbackTimer.text = playbackTime.ToString("0.00");
-            playbackSlider.value = playbackTime / mockEverySongLength;
+            var playedSeconds = Time.realtimeSinceStartup - timeOfSongStart;
+            var timeSpan = TimeSpan.FromSeconds(playedSeconds);
+            playbackTimer.text = timeSpan.ToString(@"m\:ss"); ;
+            playbackSlider.value = playedSeconds / mockEverySongLength;
         }
 
         void ResetTimerAndSlider()
         {
+            timeOfSongStart = Time.realtimeSinceStartup;
             playbackSlider.value = 0;
             playbackTimer.text = "0:00";
         }
