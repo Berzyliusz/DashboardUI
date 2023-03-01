@@ -1,4 +1,3 @@
-using DG.Tweening;
 using System;
 using System.Collections.Generic;
 
@@ -7,12 +6,18 @@ namespace CarSystems.View
     public class IndicatorHandler
     {
         Dictionary<IndicatorType, IndicatorReference> indicators;
+        HashSet<IndicatorReference> blinkingIndicators;
+
+        readonly float blinkingTime = 0.4f;
+        float timer;
 
         public IndicatorHandler(IndicatorReference[] indicatorReferences)
         {
             indicators = new Dictionary<IndicatorType, IndicatorReference>();
+            blinkingIndicators = new HashSet<IndicatorReference>();
+            timer = blinkingTime;
 
-            foreach(var indicatorReference in indicatorReferences)
+            foreach (var indicatorReference in indicatorReferences)
             {
                 indicators[indicatorReference.Type] = indicatorReference;
                 SetIndicator(indicatorReference.Type, false);
@@ -36,6 +41,34 @@ namespace CarSystems.View
             if (!indicators.ContainsKey(type))
             {
                 throw new ArgumentException($"{type} not handled in indicator handler!");
+            }
+
+            if (isOn)
+            {
+                blinkingIndicators.Add(indicators[type]);
+            }
+            else
+            {
+                blinkingIndicators.Remove(indicators[type]);
+                indicators[type].ReferenceImage.sprite = indicators[type].OffSprite;
+            }
+        }
+
+        public void Update(float deltaTime)
+        {
+            timer -= deltaTime;
+
+            if(timer < 0)
+            {
+                timer = blinkingTime;
+
+                foreach(var blinkingIndicator in blinkingIndicators)
+                {
+                    if (blinkingIndicator.ReferenceImage.sprite == blinkingIndicator.OnSprite)
+                        blinkingIndicator.ReferenceImage.sprite = blinkingIndicator.OffSprite;
+                    else
+                        blinkingIndicator.ReferenceImage.sprite = blinkingIndicator.OnSprite;
+                }
             }
         }
     }

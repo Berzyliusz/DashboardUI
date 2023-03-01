@@ -47,6 +47,9 @@ namespace CarSystems
             if (nextOrPreviousSong == 1)
                 dashboard.PreviousSong();
 
+            dashboard.SetIndicatorBlinking(IndicatorType.LeftTurn, random.Next(2) == 0);
+            dashboard.SetIndicatorBlinking(IndicatorType.RightTurn, random.Next(2) == 0);
+
             for (int i = 0; i < 6; i++)
             {
                 var indicatorToModify = random.Next(Enum.GetNames(typeof(IndicatorType)).Length - 2);

@@ -7,6 +7,7 @@ namespace CarSystems.View
         void SetEVMode(bool isOn);
         void SetSportMode(bool isOn);
         void SetIndicator(IndicatorType type, bool isOn);
+        void SetIndicatorBlinking(IndicatorType type, bool isOn);
         void NextSong();
         void PreviousSong();
         void Update(float deltaTime);
@@ -66,6 +67,12 @@ namespace CarSystems.View
         public void Update(float deltaTime)
         {
             musicHandler.Update(deltaTime);
+            indicatorHandler.Update(deltaTime);
+        }
+
+        public void SetIndicatorBlinking(IndicatorType type, bool isOn)
+        {
+            indicatorHandler.SetIndicatorBlinking(type, isOn);
         }
     }
 }
