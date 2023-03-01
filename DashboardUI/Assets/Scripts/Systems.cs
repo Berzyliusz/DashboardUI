@@ -1,4 +1,5 @@
 using CarSystems.View;
+using System.Collections;
 using UnityEngine;
 
 namespace CarSystems
@@ -19,8 +20,19 @@ namespace CarSystems
 
         void Awake()
         {
+            Screen.SetResolution(1920, 720, true, 60);
+            this.enabled = false;
+
+            StartCoroutine(StartupSystems());
+        }
+
+        IEnumerator StartupSystems()
+        {
+            yield return new WaitForSeconds(0.1f);
+
             dashboard = new Dashboard(references, carParams, musicReferences);
             inputs = new DemoInputs(dashboard, 2f);
+            this.enabled = true;
         }
 
         void Update()
