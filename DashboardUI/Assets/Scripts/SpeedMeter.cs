@@ -1,5 +1,6 @@
 ﻿using DG.Tweening;
 using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace CarSystems.View
@@ -7,17 +8,19 @@ namespace CarSystems.View
     public class SpeedMeter
     {
         readonly TextMeshProUGUI speedText;
-        readonly Slider speedSlider;
+        readonly Image speedFillImage;
         readonly int vMax;
+
+        readonly Vector2 fillMinMaxAmounts = new Vector2(0.125f, 0.47f);
 
         float currentSpeed;
 
         string[] speedStrings;
 
-        public SpeedMeter(TextMeshProUGUI speedText, Slider speedSlider, int vMax)
+        public SpeedMeter(TextMeshProUGUI speedText, Image speedFillImage, int vMax)
         {
             this.speedText = speedText;
-            this.speedSlider = speedSlider;
+            this.speedFillImage = speedFillImage;
             this.vMax = vMax;
             speedText.text = currentSpeed.ToString();
 
@@ -37,7 +40,8 @@ namespace CarSystems.View
         void UpdateDisplay()
         {
             speedText.text = speedStrings[((int)currentSpeed)];
-            speedSlider.value = currentSpeed / vMax;
+            var normalizedSpeed = currentSpeed / vMax;
+            speedFillImage.fillAmount = Mathf.Lerp(fillMinMaxAmounts.x, fillMinMaxAmounts.y, normalizedSpeed);
         }
     }
 }
